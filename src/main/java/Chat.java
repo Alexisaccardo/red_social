@@ -5,7 +5,7 @@ public class Chat {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("RED SOCIAL JOHAN S.A.S");
+        System.out.println("RED SOCIAL MELI");
 
         System.out.println("¿Deseas Regitrar usuario o Iniciar sesion?: ");
         String answer = scanner.nextLine();
@@ -23,6 +23,8 @@ public class Chat {
 
             }else{
                 Insert(user_record, password_record);
+
+                Switch(user_record,scanner);
             }
         }
 
@@ -40,51 +42,57 @@ public class Chat {
                 System.out.println("Lamentable tus credenciales estan incorrectas");
             } else {
 
-                boolean aux = true;
-
-                while (aux) {
-
-                    System.out.println("1. Enviar mensajes: ");
-                    System.out.println("2. Leer mensajes: ");
-                    System.out.println("3. Cerrar Sesion");
-                    System.out.println("Ingrese un numero entre 1 - 5: ");
-                    int result = Integer.parseInt(scanner.nextLine());
-
-                    switch (result) {
-
-                        case 1:
-
-                            System.out.print("Ingrese el mensaje que deseas enviar: ");
-                            String msg = scanner.nextLine();
-
-                            System.out.println("A que nombre de usuario quieres enviar el mensaje redactado: ");
-                            String username = scanner.nextLine();
-
-                            String userbd = Select_user(username);
-                            if (userbd.equals("")) {
-                                System.out.println("El usuario al que tratas de enviar mensaje no se encuentra registrado en la red social JOHAN S.A.S.");
-                            } else {
-
-                                SendMensages(user, msg, username);
-                            }
-
-                            break;
-                        case 2:
-
-                            Select_Mensage(user);
-                            break;
-                        case 3:
-                            System.out.println("Cerrando Sesion...");
-
-                            aux = false;
-
-                            break;
-
-                        default:
-
-                            System.out.println("Ingrese un numero valido");
-                    }
+                Switch(user,scanner);
                 }
+            }
+        }
+
+    private static void Switch (String user, Scanner scanner) throws SQLException, ClassNotFoundException {
+
+        boolean aux = true;
+
+        while (aux) {
+
+
+            System.out.println("1. Enviar mensajes: ");
+            System.out.println("2. Leer mensajes: ");
+            System.out.println("3. Cerrar Sesion");
+            System.out.println("Ingrese un numero entre 1 - 3: ");
+            int result = Integer.parseInt(scanner.nextLine());
+
+            switch (result) {
+
+                case 1:
+
+                    System.out.print("Ingrese el mensaje que deseas enviar: ");
+                    String msg = scanner.nextLine();
+
+                    System.out.println("A que nombre de usuario quieres enviar el mensaje redactado: ");
+                    String username = scanner.nextLine();
+
+                    String userbd = Select_user(username);
+                    if (userbd.equals("")) {
+                        System.out.println("El usuario al que tratas de enviar mensaje no se encuentra registrado en la red social JOHAN S.A.S.");
+                    } else {
+
+                        SendMensages(user, msg, username);
+                    }
+
+                    break;
+                case 2:
+
+                    Select_Mensage(user);
+                    break;
+                case 3:
+                    System.out.println("Cerrando Sesion...");
+
+                    aux = false;
+
+                    break;
+
+                default:
+
+                    System.out.println("Ingrese un numero valido");
             }
         }
     }
@@ -283,7 +291,7 @@ public class Chat {
             password = resultSet.getString("password");
 
 
-            System.out.println("BIENVENIDO AL SISTEMA DE RED SOCIAL JOHAN S.A.S, tu user es: " + userbd);
+            System.out.println("BIENVENIDO AL SISTEMA DE RED SOCIAL MELI S.A.S, tu user es: " + userbd);
 
             return userbd;
         }
