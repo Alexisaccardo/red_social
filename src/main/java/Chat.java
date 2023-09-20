@@ -23,7 +23,16 @@ public class Chat {
 
             }else{
                 Insert(user_record, password_record);
+                System.out.println("***INICIAR SESION***");
+                
+                System.out.println("Ingresa tu nombre de usuario: ");
+                String user = scanner.nextLine();
 
+                System.out.println("Ingresa tu password: ");
+                String password = scanner.nextLine();
+
+
+                String session = Session(user, password);
                 Switch(user_record,scanner);
             }
         }
